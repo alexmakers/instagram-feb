@@ -21,6 +21,8 @@ class PostsController < ApplicationController
     @post = Post.find params[:id]
     @post.destroy
 
+    flash[:notice] = 'Post successfully deleted.'
+
     redirect_to '/posts'
   end
 end

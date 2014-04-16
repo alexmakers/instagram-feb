@@ -42,7 +42,7 @@ describe 'posts index page' do
   end
 
   context 'with posts' do
-    before { Post.create(description: 'Some awesome snap') }
+    before { create(:post) }
 
     it 'displays the post' do
       visit '/posts'
@@ -55,6 +55,33 @@ describe 'posts index page' do
         click_link 'Delete'
 
         expect(page).not_to have_content 'Some awesome snap'
+      end
+    end
+  end
+
+  context 'with post with tags' do
+    before do
+      create(:post, tag_names: '#yolo #swag')
+      create(:post, description: 'Hello world')
+    end
+
+    describe 'clicking a tag' do
+      it 'shows the photos for that tag' do
+        visit '/posts'
+        click_link '#yolo'
+        expect(page).to have_content 'Some awesome snap'
+      end
+
+      it 'does not show photos without that tag' do
+        visit '/posts'
+        click_link '#yolo'
+        expect(page).not_to have_content 'Hello world'
+      end
+
+      it 'uses a pretty URL' do
+        visit '/posts'
+        click_link '#yolo'
+        expect(current_path).to eq '/tags/yolo'
       end
     end
   end

@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -35,11 +37,14 @@ gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
 group :development, :test do
   gem 'capybara'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :production do
   gem 'rails_12factor'
 end
+
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
