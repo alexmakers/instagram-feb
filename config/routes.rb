@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'maps/show'
+
   devise_for :users
   root 'posts#index'
   resources :tags, only: [:show]
@@ -6,6 +8,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
     resources :charges
+    resource :map
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
