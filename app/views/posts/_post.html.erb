@@ -9,8 +9,10 @@
         <% end %>
       </p>
       <p>
-        <%= pluralize post.comments.count, 'comment' %>
+        <%= link_to_if post.comments.any?, pluralize(post.comments.count, 'comment'), '#', data: { 'post-url' => post_path(post, format: :json) }, class: 'comment-link' %>
       </p>
+      <ul class='comments'>
+      </ul>
       <p>
         <%= link_to 'Delete', post_path(post), method: :delete, class: 'btn btn-danger' %>
         <%= link_to 'Add a comment', new_post_comment_path(post), class: 'btn btn-primary' %>

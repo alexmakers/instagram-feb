@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'commenting on posts' do
-  before { create(:post) }
+  let!(:post) { create(:post) }
 
   it 'begins with no comments' do
     visit '/posts'
@@ -15,5 +15,13 @@ describe 'commenting on posts' do
     click_button 'Create Comment'
 
     expect(page).to have_content '1 comment'
+  end
+
+  it 'displays comments', js: true do
+    create(:comment, post: post)
+
+    visit '/posts'
+    click_link '1 comment'
+    expect(page).to have_content 'Awesome pic!'
   end
 end
